@@ -28,9 +28,7 @@
                             <h2 class="post-title">
                                 {{ edge.node.title }}
                             </h2>
-                            <!-- <h3 class="post-subtitle">
-                                Problems look mighty small from 150 miles up
-                            </h3> -->
+                            <p class="post-content" v-html="mdToHtml(edge.node.content)"></p>
                         </g-link>
                         <p class="post-meta">
                             Posted by
@@ -67,6 +65,7 @@ query ($page: Int) {
             node {
                 id
                 title
+                content
                 created_at 
                 tags {
                     id
@@ -93,6 +92,9 @@ query ($page: Int) {
 
 <script>
 import { Pager } from 'gridsome'
+import MarkdownIt from 'markdown-it'
+const md = new MarkdownIt()
+
 export default {
     metaInfo: {
         title: 'Hello, world！'
@@ -111,7 +113,11 @@ export default {
     },
     created() {},
     mounted() {},
-    methods: {},
+    methods: {
+                mdToHtml(markdown) {
+            return md.render(markdown)
+        }
+    },
 }
 </script>
 </script>
