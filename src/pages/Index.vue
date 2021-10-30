@@ -114,7 +114,7 @@ export default {
     created() {},
     mounted() {},
     methods: {
-                mdToHtml(markdown) {
+        mdToHtml(markdown) {
             return md.render(markdown)
         }
     },
